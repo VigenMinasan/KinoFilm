@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Поиск</title>
+  <style>
+    body {
+      background: #121212;
+      color: #fff;
+      font-family: Arial;
+      padding: 20px;
+      text-align: center;
+    }
+    a { text-decoration: none; }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      width: 60%;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .movie {
+      background: #1e1e1e;
+      padding: 10px;
+      border-radius: 10px;
+      margin: 10px auto;
+      max-width: 500px;
+      display: flex;
+      gap: 10px;
+      text-align: left;
+    }
+    .movie img { width: 80px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+
+  <h1>🔍 Поиск</h1>
+
+  <a href="/"><button>← Назад</button></a>
+
+  <form method="POST" action="/search">
+    <input type="text" name="search_id" placeholder="Введите название">
+    <button type="submit">Найти</button>
+  </form>
+
+  {% if error %}
+    <p style="color: red;">{{ error }}</p>
+  {% endif %}
+
+  {% for movie in movies %}
+    <div class="movie">
+      {% if movie.poster_path %}
+        <img src="https://image.tmdb.org/t/p/w200{{ movie.poster_path }}">
+      {% endif %}
+      <div>
+        <h2>{{ movie.title }}</h2>
+        <p>{{ movie.release_date }}</p>
+        <p>{{ movie.overview[:120] }}...</p>
+      </div>
+    </div>
+  {% endfor %}
+
+</body>
+</html>

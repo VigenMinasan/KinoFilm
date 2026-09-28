@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Избранное</title>
+  <style>
+    body {
+      background: #121212;
+      color: #fff;
+      font-family: Arial;
+      padding: 16px;
+    }
+    h1 { text-align: center; }
+    a { color: #4caf50; text-decoration: none; }
+    button {
+      padding: 8px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      margin: 4px;
+    }
+    .movie {
+      background: #1e1e1e;
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      gap: 10px;
+    }
+    .movie img { width: 80px; border-radius: 6px; }
+    .movie h2 { font-size: 16px; margin-bottom: 4px; }
+    .movie p { font-size: 13px; color: #bbb; }
+  </style>
+</head>
+<body>
+
+  <h1>❤️ Избранное</h1>
+
+  <div style="text-align: center; margin-bottom: 16px;">
+    <a href="/"><button>← Домой</button></a>
+    <a href="/clear"><button>🗑 Очистить</button></a>
+  </div>
+
+  {% if favourites %}
+    {% for f in favourites %}
+      <div class="movie">
+        {% if f.poster_path %}
+          <img src="https://image.tmdb.org/t/p/w200{{ f.poster_path }}">
+        {% endif %}
+        <div>
+          <h2>{{ f.title }}</h2>
+          <p>{{ f.release_date }}</p>
+          <p>⭐ {{ f.vote_average }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p style="text-align: center;">Пока ничего нет</p>
+  {% endif %}
+
+</body>
+</html>
